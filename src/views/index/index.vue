@@ -16,12 +16,10 @@
         <el-aside style="width:180px">
           <v-menu></v-menu>
         </el-aside>
-        <el-main style="background:#f2f2f2;padding:20px">
-          <el-card style="width:100%;height:100%">
-            <transition>
-              <router-view></router-view>
-            </transition>
-          </el-card>
+        <el-main class="showContainer">
+          <transition>
+            <router-view></router-view>
+          </transition>
         </el-main>
       </el-container>
     </el-container>
