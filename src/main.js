@@ -11,6 +11,8 @@ Vue.prototype.$https = https;
 Vue.prototype.$elementUi = ElementUI;
 Vue.use(ElementUI); // 样式表
 Vue.use(https); // 封装请求方法
+//全局样式
+import '../static/css/global.css'
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
