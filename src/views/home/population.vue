@@ -7,7 +7,7 @@
         </el-col>
         <el-col :span="4">
           <el-button type="primary" size="mini" @click="openModal('add','')">添加</el-button>
-          <el-button type="primary" size="mini">批量</el-button>
+          <el-button type="primary" size="mini" @click="batchImport()">批量</el-button>
         </el-col>
       </el-row>
       <hr />
@@ -78,6 +78,15 @@
       <div class="divauto" style="text-align: center;">
         <el-button type="primary" size="mini" @click="dialogObj.isShow = false">取消</el-button>
         <el-button type="primary" size="mini" @click="sureModal">确定</el-button>
+      </div>
+    </modal>
+    <modal :modalObj="importModal">
+      <div>上传文件</div>
+      <el-upload class="upload-demo" action="https://jsonplaceholder.typicode.com/posts/" :on-success="handleSuccess" :before-upload="beforeUpload" :file-list="fileList">
+        <el-button size="small" type="primary">点击上传</el-button>
+      </el-upload>
+      <div class="divauto" style="text-align: center;">
+        <el-button type="primary" size="mini" @click="importModal.isShow = false">关闭</el-button>
       </div>
     </modal>
   </div>
@@ -212,6 +221,13 @@ export default {
           { required: true, message: '境外人口不能为空', trigger: " " },
           { type: 'number', message: '境外人口必须为数字值', trigger: " " }],
       },
+      importModal: {
+        title: '批量上传', // 标题
+        isShow: false, // 是否显示
+        width: '30%',
+        height: '40%'
+      },
+      fileList: []
     };
   },
   methods: {
@@ -265,7 +281,12 @@ export default {
           message: '已取消删除'
         });
       });
-    }
+    },
+    batchImport() { this.importModal.isShow = true },
+    beforeUpload(file) {
+      console.log(file);
+    },
+    handleSuccess(){}
   }
 };
 </script>
