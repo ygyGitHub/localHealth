@@ -94,7 +94,7 @@ export default {
   mounted() { }
 };
 </script>
-<style>
+<style scoped>
 #v-header {
   width: 100%;
   height: 100%;

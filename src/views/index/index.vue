@@ -43,7 +43,7 @@ export default {
   methods: {}
 };
 </script>
-<style>
+<style scoped>
 #v-index {
   height: 100%;
 }

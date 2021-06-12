@@ -160,7 +160,7 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
 .el-menu {
   border: 0px;
 }
