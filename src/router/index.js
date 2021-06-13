@@ -11,10 +11,9 @@ import familyDoctor from "../views/health/familyDoctor.vue";
 import actionParaphrase from "../views/health/actionParaphrase.vue";
 import actionName from "../views/health/actionName.vue";
 import professionals from "../views/health/professionals.vue";
-
 import equipment from "../views/health/equipment.vue";
 import elderlyLivingAlone from "../views/health/elderlyLivingAlone.vue";
-
+import populationStructure from "../views/health/populationStructure.vue";
 
 Vue.use(Router)
 
@@ -77,6 +76,11 @@ export default new Router({
           path: "/elderlyLivingAlone",
           name: "elderlyLivingAlone",
           component: elderlyLivingAlone
+        },
+        {
+          path: "/populationStructure",
+          name: "populationStructure",
+          component: populationStructure
         },
 
 
