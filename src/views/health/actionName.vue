@@ -65,7 +65,7 @@
       <el-form ref="modalForm" :model="modalForm" :rules="rules" label-width="120px">
         <el-form-item label="行动名称" prop="xdmc"><el-input v-model="modalForm.xdmc" ></el-input></el-form-item>
         <el-form-item label="指标" prop="zb"><el-input v-model="modalForm.zb" ></el-input></el-form-item>
-        <el-form-item label="指标描述" prop="zbms"><el-input v-model="modalForm.zbms" ></el-input></el-form-item>
+        <el-form-item label="指标描述" prop="zbms"><el-input type="textarea" v-model="modalForm.zbms" ></el-input></el-form-item>
         <el-form-item label="基期水平" prop="jqsp"><el-input v-model="modalForm.jqsp" ></el-input></el-form-item>
         <el-form-item label="常营水平" prop="cysp"><el-input v-model="modalForm.cysp" ></el-input></el-form-item>
         <el-form-item label="2020年目标值" prop="mbz"><el-input v-model="modalForm.mbz" ></el-input></el-form-item>
