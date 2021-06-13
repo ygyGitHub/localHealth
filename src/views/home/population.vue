@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <el-card>
+  <div >
+    <el-card style="min-height: 870px;">
       <el-row>
         <el-col :span="20">
           <div>常营人口信息列表</div>

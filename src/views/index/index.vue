@@ -13,7 +13,7 @@
         <v-header></v-header>
       </el-header>
       <el-container>
-        <el-aside style="width:180px">
+        <el-aside style="width:220px">
           <v-menu></v-menu>
         </el-aside>
         <el-main class="showContainer">
