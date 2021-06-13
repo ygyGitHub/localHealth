@@ -144,12 +144,12 @@ export default {
         zzrq: '',
       },
       rules: {
-        xm: [{ required: true, message: '行动名称不能为空', trigger: ' ' }],
-        zc: [{ required: true, message: '指标不能为空', trigger: ' ' }],
-        ssyy: [{ required: true, message: '指标描述不能为空', trigger: ' ' }],
-        ssyylx: [{ required: true, message: '基期水平不能为空', trigger: ' ' }],
-        sc: [{ required: true, message: '常营水平不能为空', trigger: ' ' }],
-        zzrq: [{ required: true, message: '2020年目标值不能为空', trigger: ' ' }],
+        xm: [{ required: true, message: '姓名不能为空', trigger: ' ' }],
+        zc: [{ required: true, message: '职称不能为空', trigger: ' ' }],
+        ssyy: [{ required: true, message: '所属医院不能为空', trigger: ' ' }],
+        ssyylx: [{ required: true, message: '所属医院类型不能为空', trigger: ' ' }],
+        sc: [{ required: true, message: '擅长不能为空', trigger: ' ' }],
+        zzrq: [{ required: true, message: '坐诊日期不能为空', trigger: ' ' }],
       },
       importModal: {
         title: '批量上传', // 标题
