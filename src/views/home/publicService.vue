@@ -3,7 +3,7 @@
   <div>
     <el-card style="min-height: 870px;">
       <el-row>
-        <el-col :span="20"><div>常营党建信息列表</div></el-col>
+        <el-col :span="20"><div>公共服务信息列表</div></el-col>
         <el-col :span="4">
           <el-button type="primary" size="mini" @click="openModal('add', '')">添加</el-button>
           <el-button type="primary" size="mini" @click="batchImport()">批量</el-button>
@@ -11,7 +11,7 @@
       </el-row>
       <hr />
       <el-row style="margin:35px 0px">
-        <el-col :span="22"><el-input placeholder="党组织名称" prefix-icon="el-icon-search" v-model="search"></el-input></el-col>
+        <el-col :span="22"><el-input placeholder="公共服务类型/性别/姓名" prefix-icon="el-icon-search" v-model="search"></el-input></el-col>
         <el-col :span="2"><el-button type="primary" style="float:right" @click="getData">查询</el-button></el-col>
       </el-row>
       <div>
@@ -21,7 +21,7 @@
               {{ (pagination.pageNum - 1) * pagination.pageSize + scope.$index + 1 }}
             </template>
           </el-table-column>
-          <el-table-column prop="dzz" label="党组织名称" min-width="150" align="center"></el-table-column>
+          <el-table-column prop="ggfwlx" label="公共服务类型" min-width="150" align="center"></el-table-column>
           <el-table-column prop="name" label="成员姓名" min-width="150" align="center"></el-table-column>
           <el-table-column prop="sex" label="性别" min-width="200" align="center"></el-table-column>
           <el-table-column prop="age" label="年龄" min-width="150" align="center"></el-table-column>
@@ -48,7 +48,7 @@
     </el-card>
     <modal :modalObj="dialogObj">
       <el-form ref="modalForm" :model="modalForm" :rules="rules" label-width="120px">
-        <el-form-item label="党组织名称" prop="dzz"><el-input v-model="modalForm.dzz" ></el-input></el-form-item>
+        <el-form-item label="公共服务类型" prop="ggfwlx"><el-input v-model="modalForm.ggfwlx" ></el-input></el-form-item>
         <el-form-item label="成员姓名" prop="name"><el-input v-model.number="modalForm.name" ></el-input></el-form-item>
         <el-form-item label="性别" prop="sex">
           <el-select v-model="modalForm.sex"  placeholder="性别">
@@ -97,13 +97,13 @@ export default {
         height: '70%'
       },
       modalForm: {
-        dzz: '',
+        ggfwlx: '',
         name: '',
         sex: '',
         age: ''
       },
       rules: {
-        dzz: [{ required: true, message: '请输入党组织名称', trigger: ' ' }],
+        ggfwlx: [{ required: true, message: '请输入党组织名称', trigger: ' ' }],
         name: [{ required: true, message: '成员姓名不能为空', trigger: ' ' }],
         sex: [{ required: true, message: '党员数量不能为空', trigger: ' ' }],
         age: [{ required: true, message: '年龄不能为空', trigger: ' ' }, { type: 'number', message: '年龄必须为数字值', trigger: ' ' }]
@@ -218,7 +218,7 @@ export default {
       this.tableData = []
       for (var i = 0; i < 100; i++) {
         var obj = {
-          dzz: '社区党组织',
+          ggfwlx: '公共服务类型',
           name: '王小虎',
           sex: '男',
           age: 12

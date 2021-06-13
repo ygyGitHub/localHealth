@@ -5,6 +5,8 @@ import Login from "../views/login/index.vue";
 import Index from "../views/index/index.vue";
 import population from "../views/home/population.vue";
 import partyBuilding from "../views/home/partyBuilding.vue";
+import publicService from "../views/home/publicService.vue";
+
 Vue.use(Router)
 
 export default new Router({
@@ -34,8 +36,12 @@ export default new Router({
           path: "/partyBuilding",
           name: "partyBuilding",
           component: partyBuilding
+        },{
+          path: "/publicService",
+          name: "publicService",
+          component: publicService
         },
-        
+
       ]
     }
   ]
