@@ -17,7 +17,7 @@ import populationStructure from "../views/health/populationStructure.vue";
 import communityHealthCenter from "../views/health/communityHealthCenter.vue";
 import healthyBeijing from "../views/health/healthyBeijing.vue";
 import mechanism from "../views/health/mechanism.vue";
-
+import vaccination from "../views/health/vaccination.vue";
 
 
 Vue.use(Router)
@@ -101,6 +101,11 @@ export default new Router({
           path: "/mechanism",
           name: "mechanism",
           component: mechanism
+        },
+        {
+          path: "/vaccination",
+          name: "vaccination",
+          component: vaccination
         },
 
       ]

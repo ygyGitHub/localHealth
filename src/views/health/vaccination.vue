@@ -1,9 +1,9 @@
-/** * @Description: 公共服务信息列表 * @author GyYU * @Date 2021-6-13 09:53:09 */
+/** * @Description: 常营疫苗接种信息列表 * @author GyYU * @Date 2021-6-13 09:53:09 */
 <template>
   <div>
     <el-card style="min-height: 870px;">
       <el-row>
-        <el-col :span="20"><div>公共服务信息列表</div></el-col>
+        <el-col :span="20"><div>常营疫苗接种信息列表</div></el-col>
         <el-col :span="4">
           <el-button type="primary" size="mini" @click="openModal('add', '')">添加</el-button>
           <el-button type="primary" size="mini" @click="batchImport()">批量</el-button>
@@ -11,7 +11,7 @@
       </el-row>
       <hr />
       <el-row style="margin:35px 0px">
-        <el-col :span="22"><el-input placeholder="公共服务类型/性别/姓名" prefix-icon="el-icon-search" v-model="search"></el-input></el-col>
+        <el-col :span="22"><el-input placeholder="设备ID/设备位置" prefix-icon="el-icon-search" v-model="search"></el-input></el-col>
         <el-col :span="2"><el-button type="primary" style="float:right" @click="getData">查询</el-button></el-col>
       </el-row>
       <div>
@@ -21,10 +21,14 @@
               {{ (pagination.pageNum - 1) * pagination.pageSize + scope.$index + 1 }}
             </template>
           </el-table-column>
-          <el-table-column prop="ggfwlx" label="公共服务类型" min-width="150" align="center"></el-table-column>
-          <el-table-column prop="name" label="成员姓名" min-width="150" align="center"></el-table-column>
-          <el-table-column prop="sex" label="性别" min-width="200" align="center"></el-table-column>
-          <el-table-column prop="age" label="年龄" min-width="150" align="center"></el-table-column>
+          <el-table-column prop="sqmc" label="社区名称" min-width="150" align="center"></el-table-column>
+          <el-table-column prop="jzrc" label="接种人次" min-width="150" align="center"></el-table-column>
+          <el-table-column prop="jzl" label="接种率" min-width="150" align="center"></el-table-column>
+          <el-table-column prop="brjzjs" label="每百人接种剂数" min-width="150" align="center"></el-table-column>
+          <el-table-column prop="dyzjzrc" label="第一针接种人次" min-width="150" align="center"></el-table-column>
+          <el-table-column prop="dyzjzl" label="第一针接种率" min-width="150" align="center"></el-table-column>
+          <el-table-column prop="drzjzrc" label="第二针接种人次" min-width="150" align="center"></el-table-column>
+          <el-table-column prop="drzjzl" label="第二针接种率" min-width="150" align="center"></el-table-column>
           <el-table-column label="操作" min-width="200" align="center">
             <template slot-scope="scope">
               <el-button type="text" @click="openModal('edit', scope.row)">编辑</el-button>
@@ -47,16 +51,15 @@
       </div>
     </el-card>
     <modal :modalObj="dialogObj">
-      <el-form ref="modalForm" :model="modalForm" :rules="rules" label-width="120px">
-        <el-form-item label="公共服务类型" prop="ggfwlx"><el-input v-model="modalForm.ggfwlx" ></el-input></el-form-item>
-        <el-form-item label="成员姓名" prop="name"><el-input v-model.number="modalForm.name" ></el-input></el-form-item>
-        <el-form-item label="性别" prop="sex">
-          <el-select v-model="modalForm.sex"  placeholder="性别">
-            <el-option label="男" value="1"></el-option>
-            <el-option label="女" value="2"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="年龄" prop="age"><el-input v-model.number="modalForm.age" ></el-input></el-form-item>
+      <el-form ref="modalForm" :model="modalForm" :rules="rules" label-width="140px">
+        <el-form-item label="社区名称" prop="sqmc"><el-input v-model="modalForm.sqmc" ></el-input></el-form-item>
+        <el-form-item label="接种人次" prop="jzrc"><el-input v-model="modalForm.jzrc" ></el-input></el-form-item>
+        <el-form-item label="接种率" prop="jzl"><el-input v-model="modalForm.jzl" ></el-input></el-form-item>
+        <el-form-item label="每百人接种剂数" prop="brjzjs"><el-input v-model="modalForm.brjzjs" ></el-input></el-form-item>
+        <el-form-item label="第一针接种人次" prop="dyzjzrc"><el-input v-model="modalForm.dyzjzrc" ></el-input></el-form-item>
+        <el-form-item label="第一针接种率" prop="dyzjzl"><el-input v-model="modalForm.dyzjzl" ></el-input></el-form-item>
+        <el-form-item label="第二针接种人次" prop="drzjzrc"><el-input v-model="modalForm.drzjzrc" ></el-input></el-form-item>
+        <el-form-item label="第二针接种率" prop="drzjzl"><el-input v-model="modalForm.drzjzl" ></el-input></el-form-item>
       </el-form>
       <div class="divauto" style="text-align: center;">
         <el-button type="primary" size="mini" @click="dialogObj.isShow = false">取消</el-button>
@@ -97,16 +100,24 @@ export default {
         height: '70%'
       },
       modalForm: {
-        ggfwlx: '',
-        name: '',
-        sex: '',
-        age: ''
+        sqmc: '',
+        jzrc: '',
+        jzl: '',
+        brjzjs: '',
+        dyzjzrc: '',
+        dyzjzl: '',
+        drzjzrc: '',
+        drzjzl: '',
       },
       rules: {
-        ggfwlx: [{ required: true, message: '请输入党组织名称', trigger: ' ' }],
-        name: [{ required: true, message: '成员姓名不能为空', trigger: ' ' }],
-        sex: [{ required: true, message: '党员数量不能为空', trigger: ' ' }],
-        age: [{ required: true, message: '年龄不能为空', trigger: ' ' }, { type: 'number', message: '年龄必须为数字值', trigger: ' ' }]
+        sqmc: [{ required: true, message: '社区名称不能为空', trigger: ' ' }],
+        jzrc: [{ required: true, message: '接种人次不能为空', trigger: ' ' }],
+        jzl: [{ required: true, message: '接种率不能为空', trigger: ' ' }],
+        brjzjs: [{ required: true, message: '每百人接种剂数不能为空', trigger: ' ' }],
+        dyzjzrc: [{ required: true, message: '第一针接种人次不能为空', trigger: ' ' }],
+        dyzjzl: [{ required: true, message: '第一针接种率不能为空', trigger: ' ' }],
+        drzjzrc: [{ required: true, message: '第二针接种人次不能为空', trigger: ' ' }],
+        drzjzl: [{ required: true, message: '第二针接种率不能为空', trigger: ' ' }],
       },
       importModal: {
         title: '批量上传', // 标题
@@ -144,10 +155,14 @@ export default {
       this.status = type;
       if (type == 'add') {
         this.modalForm = {
-        ggfwlx: '',
-        name: '',
-        sex: '',
-        age: ''
+        sqmc: '',
+        jzrc: '',
+        jzl: '',
+        brjzjs: '',
+        dyzjzrc: '',
+        dyzjzl: '',
+        drzjzrc: '',
+        drzjzl: '',
       };
         this.dialogObj.title = '添加';
       } else {
@@ -222,12 +237,16 @@ export default {
       this.tableData = []
       for (var i = 0; i < 100; i++) {
         var obj = {
-          ggfwlx: '公共服务类型',
-          name: '王小虎',
-          sex: '男',
-          age: 12
-        };
-        obj.age = obj.age + i;
+        sqmc: '社区名称',
+        jzrc: '12',
+        jzl: '12',
+        brjzjs: '13',
+        dyzjzrc: '13',
+        dyzjzl: '13',
+        drzjzrc: '13',
+        drzjzl: '13',
+      };
+        obj.sqmc = obj.sqmc + i;
         this.tableData.push(obj);
       }
       this.pagination.total = this.tableData.length;
@@ -257,8 +276,4 @@ export default {
 };
 </script>
 
-<style>
-  .el-select{
-    width: 100%;
-  }
-</style>
+<style></style>
