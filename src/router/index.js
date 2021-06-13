@@ -10,7 +10,7 @@ import environmentalManagement from "../views/home/environmentalManagement.vue";
 import familyDoctor from "../views/health/familyDoctor.vue";
 import actionParaphrase from "../views/health/actionParaphrase.vue";
 import actionName from "../views/health/actionName.vue";
-
+import professionals from "../views/health/professionals.vue";
 Vue.use(Router)
 
 export default new Router({
@@ -60,6 +60,10 @@ export default new Router({
           path: "/actionName",
           name: "actionName",
           component: actionName
+        },{
+          path: "/professionals",
+          name: "professionals",
+          component: professionals
         },
 
 
