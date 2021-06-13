@@ -1,9 +1,9 @@
-/** * @Description: 常营党建 * @author GyYU * @Date 2021-6-13 09:53:09 */
+/** * @Description: 健康资源-机构信息列表 * @author GyYU * @Date 2021-6-13 09:53:09 */
 <template>
   <div>
     <el-card style="min-height: 870px;">
       <el-row>
-        <el-col :span="20"><div>公共服务信息列表</div></el-col>
+        <el-col :span="20"><div>健康资源-机构信息列表</div></el-col>
         <el-col :span="4">
           <el-button type="primary" size="mini" @click="openModal('add', '')">添加</el-button>
           <el-button type="primary" size="mini" @click="batchImport()">批量</el-button>
@@ -11,7 +11,7 @@
       </el-row>
       <hr />
       <el-row style="margin:35px 0px">
-        <el-col :span="22"><el-input placeholder="公共服务类型/性别/姓名" prefix-icon="el-icon-search" v-model="search"></el-input></el-col>
+        <el-col :span="22"><el-input placeholder="机构名称/机构类型/地理位置" prefix-icon="el-icon-search" v-model="search"></el-input></el-col>
         <el-col :span="2"><el-button type="primary" style="float:right" @click="getData">查询</el-button></el-col>
       </el-row>
       <div>
@@ -21,10 +21,15 @@
               {{ (pagination.pageNum - 1) * pagination.pageSize + scope.$index + 1 }}
             </template>
           </el-table-column>
-          <el-table-column prop="ggfwlx" label="公共服务类型" min-width="150" align="center"></el-table-column>
-          <el-table-column prop="name" label="成员姓名" min-width="150" align="center"></el-table-column>
-          <el-table-column prop="sex" label="性别" min-width="200" align="center"></el-table-column>
-          <el-table-column prop="age" label="年龄" min-width="150" align="center"></el-table-column>
+          <el-table-column prop="jgmc" label="机构名称" min-width="150" align="center"></el-table-column>
+          <el-table-column prop="jglx" label="机构类型" min-width="150" align="center">
+            <template slot-scope="scope">
+              <span v-if="scope.row.jglx==1">机构类型1</span>
+              <span v-if="scope.row.jglx==2">机构类型2</span>
+              <span v-if="scope.row.jglx==3">机构类型3</span>
+            </template>
+          </el-table-column>
+          <el-table-column prop="dlwz" label="地理位置" min-width="150" align="center"></el-table-column>
           <el-table-column label="操作" min-width="200" align="center">
             <template slot-scope="scope">
               <el-button type="text" @click="openModal('edit', scope.row)">编辑</el-button>
@@ -48,15 +53,15 @@
     </el-card>
     <modal :modalObj="dialogObj">
       <el-form ref="modalForm" :model="modalForm" :rules="rules" label-width="120px">
-        <el-form-item label="公共服务类型" prop="ggfwlx"><el-input v-model="modalForm.ggfwlx" ></el-input></el-form-item>
-        <el-form-item label="成员姓名" prop="name"><el-input v-model.number="modalForm.name" ></el-input></el-form-item>
-        <el-form-item label="性别" prop="sex">
-          <el-select v-model="modalForm.sex"  placeholder="性别">
-            <el-option label="男" value="1"></el-option>
-            <el-option label="女" value="2"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="年龄" prop="age"><el-input v-model.number="modalForm.age" ></el-input></el-form-item>
+        <el-form-item label="机构名称" prop="jgmc"><el-input v-model="modalForm.jgmc" ></el-input></el-form-item>
+        <el-form-item label="机构类型" prop="jglx">
+            <el-select v-model="modalForm.jglx" placeholder="请选择机构类型">
+              <el-option label="机构类型1" value="1"></el-option>
+              <el-option label="机构类型2" value="2"></el-option>
+              <el-option label="机构类型3" value="3"></el-option>
+            </el-select>
+          </el-form-item>
+        <el-form-item label="地理位置" prop="dlwz"><el-input type="textarea" v-model.number="modalForm.dlwz" ></el-input></el-form-item>
       </el-form>
       <div class="divauto" style="text-align: center;">
         <el-button type="primary" size="mini" @click="dialogObj.isShow = false">取消</el-button>
@@ -97,16 +102,14 @@ export default {
         height: '70%'
       },
       modalForm: {
-        ggfwlx: '',
-        name: '',
-        sex: '',
-        age: ''
+        jgmc: '',
+        jglx: '',
+        dlwz:''
       },
       rules: {
-        ggfwlx: [{ required: true, message: '请输入党组织名称', trigger: ' ' }],
-        name: [{ required: true, message: '成员姓名不能为空', trigger: ' ' }],
-        sex: [{ required: true, message: '党员数量不能为空', trigger: ' ' }],
-        age: [{ required: true, message: '年龄不能为空', trigger: ' ' }, { type: 'number', message: '年龄必须为数字值', trigger: ' ' }]
+        jgmc: [{ required: true, message: '机构名称不能为空', trigger: ' ' }],
+        jglx: [{ required: true, message: '机构类型不能为空', trigger: ' ' }],
+        dlwz: [{ required: true, message: '地理位置不能为空', trigger: ' ' }],
       },
       importModal: {
         title: '批量上传', // 标题
@@ -144,10 +147,9 @@ export default {
       this.status = type;
       if (type == 'add') {
         this.modalForm = {
-        ggfwlx: '',
-        name: '',
-        sex: '',
-        age: ''
+        jgmc: '',
+        jglx: '',
+        dlwz:''
       };
         this.dialogObj.title = '添加';
       } else {
@@ -222,12 +224,12 @@ export default {
       this.tableData = []
       for (var i = 0; i < 100; i++) {
         var obj = {
-          ggfwlx: '公共服务类型',
-          name: '王小虎',
-          sex: '男',
-          age: 12
+          jgmc: '机构名称',
+          jglx: '1',
+          dlwz:'地理位置'
         };
-        obj.age = obj.age + i;
+        obj.jgmc = obj.jgmc + i;
+        obj.dlwz = obj.dlwz + i;
         this.tableData.push(obj);
       }
       this.pagination.total = this.tableData.length;

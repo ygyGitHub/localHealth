@@ -54,7 +54,7 @@
     <modal :modalObj="dialogObj">
       <el-form ref="modalForm" :model="modalForm" :rules="rules" label-width="120px">
         <el-form-item label="机构名称" prop="jgmc"><el-input v-model="modalForm.jgmc" ></el-input></el-form-item>
-        <el-form-item label="活动区域" prop="jglx">
+        <el-form-item label="机构类型" prop="jglx">
             <el-select v-model="modalForm.jglx" placeholder="请选择机构类型">
               <el-option label="机构类型1" value="1"></el-option>
               <el-option label="机构类型2" value="2"></el-option>
@@ -259,4 +259,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+  .el-select{
+    width: 100%;
+  }
+</style>

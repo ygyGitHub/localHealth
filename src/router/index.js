@@ -14,6 +14,11 @@ import professionals from "../views/health/professionals.vue";
 import equipment from "../views/health/equipment.vue";
 import elderlyLivingAlone from "../views/health/elderlyLivingAlone.vue";
 import populationStructure from "../views/health/populationStructure.vue";
+import communityHealthCenter from "../views/health/communityHealthCenter.vue";
+import healthyBeijing from "../views/health/healthyBeijing.vue";
+import mechanism from "../views/health/mechanism.vue";
+
+
 
 Vue.use(Router)
 
@@ -82,7 +87,21 @@ export default new Router({
           name: "populationStructure",
           component: populationStructure
         },
-
+        {
+          path: "/communityHealthCenter",
+          name: "communityHealthCenter",
+          component: communityHealthCenter
+        },
+        {
+          path: "/healthyBeijing",
+          name: "healthyBeijing",
+          component: healthyBeijing
+        },
+        {
+          path: "/mechanism",
+          name: "mechanism",
+          component: mechanism
+        },
 
       ]
     }
