@@ -1,4 +1,4 @@
-/** * @Description: 常营党建 * @author GyYU * @Date 2021-6-13 09:53:09 */
+/** * @Description: 健康之家设备信息列表 * @author GyYU * @Date 2021-6-13 09:53:09 */
 <template>
   <div>
     <el-card style="min-height: 870px;">
