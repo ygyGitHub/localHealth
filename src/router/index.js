@@ -6,6 +6,10 @@ import Index from "../views/index/index.vue";
 import population from "../views/home/population.vue";
 import partyBuilding from "../views/home/partyBuilding.vue";
 import publicService from "../views/home/publicService.vue";
+import environmentalManagement from "../views/home/environmentalManagement.vue";
+import familyDoctor from "../views/health/familyDoctor.vue";
+
+
 
 Vue.use(Router)
 
@@ -40,7 +44,16 @@ export default new Router({
           path: "/publicService",
           name: "publicService",
           component: publicService
+        },{
+          path: "/environmentalManagement",
+          name: "environmentalManagement",
+          component: environmentalManagement
+        },{
+          path: "/familyDoctor",
+          name: "familyDoctor",
+          component: familyDoctor
         },
+
 
       ]
     }
