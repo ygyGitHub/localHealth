@@ -63,7 +63,7 @@ export default new Router({
         },{
           path: "/professionals",
           name: "professionals",
-          component: professionals
+          component: professionals  
         },
 
 
