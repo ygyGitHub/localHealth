@@ -18,7 +18,7 @@ import communityHealthCenter from "../views/health/communityHealthCenter.vue";
 import healthyBeijing from "../views/health/healthyBeijing.vue";
 import mechanism from "../views/health/mechanism.vue";
 import vaccination from "../views/health/vaccination.vue";
-
+import homeDoctorService from "../views/applets/homeDoctorService.vue";
 
 Vue.use(Router)
 
@@ -106,6 +106,11 @@ export default new Router({
           path: "/vaccination",
           name: "vaccination",
           component: vaccination
+        },
+        {
+          path: "/homeDoctorService",
+          name: "homeDoctorService",
+          component: homeDoctorService
         },
 
       ]

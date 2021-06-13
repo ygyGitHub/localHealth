@@ -28,27 +28,26 @@ open	Dialog 打开的回调	—
 close	Dialog 关闭的回调	—
 closed	Dialog 关闭动画结束时的回调	—
   -->
-  <el-dialog
-    :modal="true"
-    :modal-append-to-body="true"
-    :title="modalObj.title"
-    :visible.sync="modalObj.isShow"
-    :width="modalObj.width"
-    :height="modalObj.height"
-    :close-on-click-modal="false"
-    :show-close="modalObj.showClose==false?modalObj.showClose:true"
-    :close-on-press-escape="true"
-    center>
-    <slot></slot>
-    <!--<div class="divauto">
-      <el-button type="success" size="mini" @click="showDio" round>Table</el-button>
-      <el-button type="success" size="mini" @click="showDio" round>Table</el-button>
-    </div>-->
-
-  </el-dialog>
-
-
-
+  <div v-if="modalObj.isShow">
+    <el-dialog
+      :modal="true"
+      :modal-append-to-body="true"
+      :title="modalObj.title"
+      :visible.sync="modalObj.isShow"
+      :width="modalObj.width"
+      :height="modalObj.height"
+      :close-on-click-modal="false"
+      :show-close="modalObj.showClose==false?modalObj.showClose:true"
+      :close-on-press-escape="true"
+      center>
+      <slot></slot>
+      <!--<div class="divauto">
+        <el-button type="success" size="mini" @click="showDio" round>Table</el-button>
+        <el-button type="success" size="mini" @click="showDio" round>Table</el-button>
+      </div>-->
+    
+    </el-dialog>
+  </div>
 </template>
 <script>
   export default {
