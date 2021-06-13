@@ -20,6 +20,7 @@ import mechanism from "../views/health/mechanism.vue";
 import vaccination from "../views/health/vaccination.vue";
 import homeDoctorService from "../views/applets/homeDoctorService.vue";
 import freeClinicAppointment from "../views/applets/freeClinicAppointment.vue";
+import expertAppointment from "../views/applets/expertAppointment.vue";
 Vue.use(Router)
 
 export default new Router({
@@ -116,6 +117,11 @@ export default new Router({
           path: "/freeClinicAppointment",
           name: "freeClinicAppointment",
           component: freeClinicAppointment
+        },
+        {
+          path: "/expertAppointment",
+          name: "expertAppointment",
+          component: expertAppointment
         },
       ]
     }
