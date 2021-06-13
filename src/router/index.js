@@ -19,7 +19,7 @@ import healthyBeijing from "../views/health/healthyBeijing.vue";
 import mechanism from "../views/health/mechanism.vue";
 import vaccination from "../views/health/vaccination.vue";
 import homeDoctorService from "../views/applets/homeDoctorService.vue";
-
+import freeClinicAppointment from "../views/applets/freeClinicAppointment.vue";
 Vue.use(Router)
 
 export default new Router({
@@ -45,39 +45,39 @@ export default new Router({
           path: "/population",
           name: "population",
           component: population
-        },{
+        }, {
           path: "/partyBuilding",
           name: "partyBuilding",
           component: partyBuilding
-        },{
+        }, {
           path: "/publicService",
           name: "publicService",
           component: publicService
-        },{
+        }, {
           path: "/environmentalManagement",
           name: "environmentalManagement",
           component: environmentalManagement
-        },{
+        }, {
           path: "/familyDoctor",
           name: "familyDoctor",
           component: familyDoctor
-        },{
+        }, {
           path: "/actionParaphrase",
           name: "actionParaphrase",
           component: actionParaphrase
-        },{
+        }, {
           path: "/actionName",
           name: "actionName",
           component: actionName
-        },{
+        }, {
           path: "/professionals",
           name: "professionals",
           component: professionals
-        },{
+        }, {
           path: "/equipment",
           name: "equipment",
           component: equipment
-        },{
+        }, {
           path: "/elderlyLivingAlone",
           name: "elderlyLivingAlone",
           component: elderlyLivingAlone
@@ -112,7 +112,11 @@ export default new Router({
           name: "homeDoctorService",
           component: homeDoctorService
         },
-
+        {
+          path: "/freeClinicAppointment",
+          name: "freeClinicAppointment",
+          component: freeClinicAppointment
+        },
       ]
     }
   ]
