@@ -11,6 +11,11 @@ import familyDoctor from "../views/health/familyDoctor.vue";
 import actionParaphrase from "../views/health/actionParaphrase.vue";
 import actionName from "../views/health/actionName.vue";
 import professionals from "../views/health/professionals.vue";
+
+import equipment from "../views/health/equipment.vue";
+
+
+
 Vue.use(Router)
 
 export default new Router({
@@ -63,7 +68,11 @@ export default new Router({
         },{
           path: "/professionals",
           name: "professionals",
-          component: professionals  
+          component: professionals
+        },{
+          path: "/equipment",
+          name: "equipment",
+          component: equipment
         },
 
 
