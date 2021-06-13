@@ -101,7 +101,8 @@ export default {
         width: '30%',
         height: '40%'
       },
-      fileList: []
+      fileList: [],
+      checkData:{}
     };
   },
   methods: {
@@ -126,6 +127,7 @@ export default {
     // 弹出模态框
     openModal(type, data) {
       console.log(data)
+      this.checkData = data
       this.status = type;
       if (type == 'add') {
         this.modalForm = {
@@ -134,7 +136,7 @@ export default {
       };
         this.dialogObj.title = '添加';
       } else {
-        this.modalForm = data;
+        this.modalForm = this.deepClone(data);
         this.dialogObj.title = '编辑';
       }
       this.dialogObj.isShow = true;
@@ -144,6 +146,9 @@ export default {
       this.$refs.modalForm.validate(valid => {
         console.log(valid)
         if (valid) {
+          for(var key in this.checkData){
+            this.checkData[key] = this.modalForm[key]
+          }
           this.addData();
           this.dialogObj.isShow = false;
         }
@@ -223,6 +228,11 @@ export default {
     // 上传成功
     handleSuccess() {
       this.getData();
+    },
+    deepClone(obj){
+      var _obj = JSON.stringify(obj),
+        objClone = JSON.parse(_obj);
+      return objClone
     }
   },
   created() {
