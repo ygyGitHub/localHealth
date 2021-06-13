@@ -56,22 +56,22 @@
     </el-card>
     <modal :modalObj="dialogObj">
       <el-form ref="modalForm" :model="modalForm" :rules="rules" label-width="120px">
-        <el-form-item label="社区名称">
+        <el-form-item label="社区名称" prop="name" >
           <el-input v-model="modalForm.name" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="社区常驻人口">
+        <el-form-item label="社区常驻人口" prop="permanentNum" >
           <el-input v-model.number="modalForm.permanentNum" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="党员数量">
+        <el-form-item label="党员数量" prop="partyNum" >
           <el-input v-model.number="modalForm.partyNum" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="本市户口">
+        <el-form-item label="本市户口" prop="cityNum" >
           <el-input v-model.number="modalForm.cityNum" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="少数名族户口">
+        <el-form-item label="少数名族户口" prop="minorityNum" >
           <el-input v-model.number="modalForm.minorityNum" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="境外人口">
+        <el-form-item label="境外人口" prop="abroadNum" >
           <el-input v-model.number="modalForm.abroadNum" autocomplete="off"></el-input>
         </el-form-item>
       </el-form>
