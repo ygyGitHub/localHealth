@@ -9,7 +9,7 @@ import publicService from "../views/home/publicService.vue";
 import environmentalManagement from "../views/home/environmentalManagement.vue";
 import familyDoctor from "../views/health/familyDoctor.vue";
 import actionParaphrase from "../views/health/actionParaphrase.vue";
-
+import actionName from "../views/health/actionName.vue";
 
 Vue.use(Router)
 
@@ -56,6 +56,10 @@ export default new Router({
           path: "/actionParaphrase",
           name: "actionParaphrase",
           component: actionParaphrase
+        },{
+          path: "/actionName",
+          name: "actionName",
+          component: actionName
         },
 
 
