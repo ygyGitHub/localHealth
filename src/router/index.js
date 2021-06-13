@@ -4,7 +4,7 @@ import HelloWorld from '@/components/HelloWorld'
 import Login from "../views/login/index.vue";
 import Index from "../views/index/index.vue";
 import population from "../views/home/population.vue";
-
+import partyBuilding from "../views/home/partyBuilding.vue";
 Vue.use(Router)
 
 export default new Router({
@@ -30,7 +30,12 @@ export default new Router({
           path: "/population",
           name: "population",
           component: population
-        }
+        },{
+          path: "/partyBuilding",
+          name: "partyBuilding",
+          component: partyBuilding
+        },
+        
       ]
     }
   ]
