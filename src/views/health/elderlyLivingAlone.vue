@@ -1,9 +1,9 @@
-/** * @Description: 健康之家设备信息列表 * @author GyYU * @Date 2021-6-13 09:53:09 */
+/** * @Description: 独居老人信息列表 * @author GyYU * @Date 2021-6-13 09:53:09 */
 <template>
   <div>
     <el-card style="min-height: 870px;">
       <el-row>
-        <el-col :span="20"><div>健康之家设备信息列表</div></el-col>
+        <el-col :span="20"><div>独居老人信息列表</div></el-col>
         <el-col :span="4">
           <el-button type="primary" size="mini" @click="openModal('add', '')">添加</el-button>
           <el-button type="primary" size="mini" @click="batchImport()">批量</el-button>
@@ -23,6 +23,7 @@
           </el-table-column>
           <el-table-column prop="sbID" label="设备ID" min-width="150" align="center"></el-table-column>
           <el-table-column prop="sbwz" label="设备位置" min-width="150" align="center"></el-table-column>
+          <el-table-column prop="wxdsc" label="未行动时常" min-width="150" align="center"></el-table-column>
           <el-table-column label="操作" min-width="200" align="center">
             <template slot-scope="scope">
               <el-button type="text" @click="openModal('edit', scope.row)">编辑</el-button>
@@ -48,6 +49,7 @@
       <el-form ref="modalForm" :model="modalForm" :rules="rules" label-width="120px">
         <el-form-item label="设备ID" prop="sbID"><el-input v-model="modalForm.sbID" ></el-input></el-form-item>
         <el-form-item label="设备位置" prop="sbwz"><el-input type="textarea" v-model.number="modalForm.sbwz" ></el-input></el-form-item>
+        <el-form-item label="未行动时常" prop="wxdsc"><el-input v-model.number="modalForm.wxdsc" ></el-input></el-form-item>
       </el-form>
       <div class="divauto" style="text-align: center;">
         <el-button type="primary" size="mini" @click="dialogObj.isShow = false">取消</el-button>
@@ -90,10 +92,12 @@ export default {
       modalForm: {
         sbID: '',
         sbwz: '',
+        wxdsc:''
       },
       rules: {
         sbID: [{ required: true, message: '设备ID不能为空', trigger: ' ' }],
         sbwz: [{ required: true, message: '设备位置不能为空', trigger: ' ' }],
+        wxdsc: [{ required: true, message: '未行动时常不能为空', trigger: ' ' }],
       },
       importModal: {
         title: '批量上传', // 标题
@@ -133,6 +137,7 @@ export default {
         this.modalForm = {
         sbID: '',
         sbwz: '',
+        wxdsc:''
       };
         this.dialogObj.title = '添加';
       } else {
@@ -208,7 +213,8 @@ export default {
       for (var i = 0; i < 100; i++) {
         var obj = {
           sbID: '设备id',
-          sbwz: '设备位置'
+          sbwz: '设备位置',
+          wxdsc:'2h'
         };
         obj.sbID = obj.sbID + i;
         obj.sbwz = obj.sbwz + i;

@@ -13,7 +13,7 @@ import actionName from "../views/health/actionName.vue";
 import professionals from "../views/health/professionals.vue";
 
 import equipment from "../views/health/equipment.vue";
-
+import elderlyLivingAlone from "../views/health/elderlyLivingAlone.vue";
 
 
 Vue.use(Router)
@@ -73,6 +73,10 @@ export default new Router({
           path: "/equipment",
           name: "equipment",
           component: equipment
+        },{
+          path: "/elderlyLivingAlone",
+          name: "elderlyLivingAlone",
+          component: elderlyLivingAlone
         },
 
 
