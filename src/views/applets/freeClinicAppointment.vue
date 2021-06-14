@@ -89,22 +89,63 @@
       </div>
     </modal>
     <modal :modalObj="rosterModal">
-      <el-table :data="rosterData" style="width: 100%">
-        <el-table-column>
-          <template slot="header" slot-scope="scope">
+      <div style="float:left; width:auto;">
+        <div style=" width: 100%;float:left;">
+          <el-select v-model="community" placeholder="请选择" size="mini" class="communityCelect">
+            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
+        </div>
+        <div class="rosterTitle">{{pbq}}-{{pbz}} <i class="el-icon-date"></i> 排班</div>
+      </div>
+      <el-table :data="rosterData" :span-method="objectSpanMethod" style="width: 100%" border>
+        <el-table-column label="" width="117">
+          <template slot-scope="scope">
+            <span>{{scope.row.label}}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="星期一" width="120">
+          <template slot-scope="scope">
             <el-select v-model="community" placeholder="请选择" size="mini">
               <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
           </template>
         </el-table-column>
-        <el-table-column>
-          <template slot="header" slot-scope="scope">
-            6.1-6.7                     排班
+        <el-table-column label="星期二" width="120">
+          <template slot-scope="scope">
+            <el-select v-model="community" placeholder="请选择" size="mini">
+              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+              </el-option>
+            </el-select>
+          </template>
+        </el-table-column>
+        <el-table-column label="星期三" width="120">
+          <template slot-scope="scope">
+            <el-select v-model="community" placeholder="请选择" size="mini">
+              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+              </el-option>
+            </el-select>
+          </template>
+        </el-table-column>
+        <el-table-column label="星期四" width="120">
+          <template slot-scope="scope">
+            <el-select v-model="community" placeholder="请选择" size="mini">
+              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+              </el-option>
+            </el-select>
+          </template>
+        </el-table-column>
+        <el-table-column label="星期五" width="120">
+          <template slot-scope="scope">
+            <el-select v-model="community" placeholder="请选择" size="mini">
+              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+              </el-option>
+            </el-select>
           </template>
         </el-table-column>
       </el-table>
-      <div class="divauto" style="text-align: center;">
+      <div class="divauto" style="text-align: center;margin-top:10px">
         <el-button type="primary" size="mini" @click="dialogObj.isShow = false">取消</el-button>
         <el-button type="primary" size="mini" @click="sureModal">确定</el-button>
       </div>
@@ -163,7 +204,7 @@ export default {
       rosterModal: {
         title: '排班', // 标题
         isShow: false, // 是否显示
-        width: '30%',
+        width: '40%',
         height: '40%'
       },
       options: [{
@@ -173,7 +214,27 @@ export default {
         value: '选项2',
         label: '第二社区'
       }],
-      community: ''
+      community: '',
+      pbq: '',
+      pbz: '',
+      rosterData: [
+        {
+          id: '1',
+          label: '上午',
+        },
+        {
+          id: '2',
+          label: '上午',
+        },
+        {
+          id: '3',
+          label: '上午',
+        },
+        {
+          id: '4',
+          label: '上午',
+        },
+      ]
     };
   },
   methods: {
@@ -332,7 +393,41 @@ export default {
       }
       return isJPG && isLt2M;
     },
-    roster() { this.rosterModal.isShow = true; }
+    roster() {
+      this.getRosterDate();
+      this.rosterModal.isShow = true;
+    },
+    getRosterDate() {
+      var now = new Date();
+      var nowTime = now.getTime();
+      var day = now.getDay();
+      var oneDayLong = 24 * 60 * 60 * 1000;
+      var MondayTime = nowTime - (day - 1) * oneDayLong;
+      var SundayTime = nowTime + (7 - day) * oneDayLong;
+      var monday = new Date(MondayTime);
+      var sunday = new Date(SundayTime);
+      var currentMonday = new Date(monday)
+      currentMonday = currentMonday.getMonth() + 1 + '.' + currentMonday.getDate()
+      this.pbq = currentMonday;
+      var currentSunday = new Date(sunday)
+      currentSunday = currentSunday.getMonth() + 1 + '.' + currentSunday.getDate()
+      this.pbz = currentSunday;
+    },
+    objectSpanMethod({ row, column, rowIndex, columnIndex }) {
+      if (columnIndex === 0) {
+        if (rowIndex % 2 === 0) {
+          return {
+            rowspan: 2,
+            colspan: 1
+          };
+        } else {
+          return {
+            rowspan: 0,
+            colspan: 0
+          };
+        }
+      }
+    }
   },
   created() {
     this.getData();
@@ -364,5 +459,20 @@ export default {
   height: 259px;
   display: block;
   border: 1px solid #d9d9d9 !important;
+}
+.communityCelect {
+  width: 118px;
+  border-radius: 0px !important;
+  border-bottom: 0px !important;
+}
+.rosterTitle {
+  position: relative;
+  width: 598px;
+  float: right;
+  margin-right: -600px;
+  border: 1px solid rgb(235, 238, 245);
+  height: 26px;
+  line-height: 26px;
+  text-align: center;
 }
 </style>
