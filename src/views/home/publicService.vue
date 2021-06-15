@@ -11,7 +11,7 @@
       </el-row>
       <hr />
       <el-row style="margin:35px 0px">
-        <el-col :span="22"><el-input placeholder="公共服务类型/性别/姓名" prefix-icon="el-icon-search" v-model="search"></el-input></el-col>
+        <el-col :span="22"><el-input placeholder="公共服务类型/数量" prefix-icon="el-icon-search" v-model="search"></el-input></el-col>
         <el-col :span="2"><el-button type="primary" style="float:right" @click="getData">查询</el-button></el-col>
       </el-row>
       <div>
@@ -22,9 +22,7 @@
             </template>
           </el-table-column>
           <el-table-column prop="ggfwlx" label="公共服务类型" min-width="150" align="center"></el-table-column>
-          <el-table-column prop="name" label="成员姓名" min-width="150" align="center"></el-table-column>
-          <el-table-column prop="sex" label="性别" min-width="200" align="center"></el-table-column>
-          <el-table-column prop="age" label="年龄" min-width="150" align="center"></el-table-column>
+          <el-table-column prop="number" label="数量" min-width="150" align="center"></el-table-column>
           <el-table-column label="操作" min-width="200" align="center">
             <template slot-scope="scope">
               <el-button type="text" @click="openModal('edit', scope.row)">编辑</el-button>
@@ -49,14 +47,7 @@
     <modal :modalObj="dialogObj">
       <el-form ref="modalForm" :model="modalForm" :rules="rules" label-width="120px">
         <el-form-item label="公共服务类型" prop="ggfwlx"><el-input v-model="modalForm.ggfwlx" ></el-input></el-form-item>
-        <el-form-item label="成员姓名" prop="name"><el-input v-model.number="modalForm.name" ></el-input></el-form-item>
-        <el-form-item label="性别" prop="sex">
-          <el-select v-model="modalForm.sex"  placeholder="性别">
-            <el-option label="男" value="1"></el-option>
-            <el-option label="女" value="2"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="年龄" prop="age"><el-input v-model.number="modalForm.age" ></el-input></el-form-item>
+        <el-form-item label="数量" prop="number"><el-input v-model.number="modalForm.number" ></el-input></el-form-item>
       </el-form>
       <div class="divauto" style="text-align: center;">
         <el-button type="primary" size="mini" @click="dialogObj.isShow = false">取消</el-button>
@@ -98,15 +89,11 @@ export default {
       },
       modalForm: {
         ggfwlx: '',
-        name: '',
-        sex: '',
-        age: ''
+        number: '',
       },
       rules: {
-        ggfwlx: [{ required: true, message: '请输入党组织名称', trigger: ' ' }],
-        name: [{ required: true, message: '成员姓名不能为空', trigger: ' ' }],
-        sex: [{ required: true, message: '党员数量不能为空', trigger: ' ' }],
-        age: [{ required: true, message: '年龄不能为空', trigger: ' ' }, { type: 'number', message: '年龄必须为数字值', trigger: ' ' }]
+        ggfwlx: [{ required: true, message: '请输入公共服务类型', trigger: ' ' }],
+        number: [{ required: true, message: '数量不能为空', trigger: ' ' }, { type: 'number', message: '数量必须为数字值', trigger: ' ' }]
       },
       importModal: {
         title: '批量上传', // 标题
@@ -145,9 +132,7 @@ export default {
       if (type == 'add') {
         this.modalForm = {
         ggfwlx: '',
-        name: '',
-        sex: '',
-        age: ''
+        number: '',
       };
         this.dialogObj.title = '添加';
       } else {
@@ -223,11 +208,9 @@ export default {
       for (var i = 0; i < 100; i++) {
         var obj = {
           ggfwlx: '公共服务类型',
-          name: '王小虎',
-          sex: '男',
-          age: 12
+          number: 12
         };
-        obj.age = obj.age + i;
+        obj.number = obj.number + i;
         this.tableData.push(obj);
       }
       this.pagination.total = this.tableData.length;

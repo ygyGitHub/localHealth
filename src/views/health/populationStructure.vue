@@ -52,7 +52,7 @@
     </el-card>
     <modal :modalObj="dialogObj">
       <el-form ref="modalForm" :model="modalForm" :rules="rules" label-width="120px">
-        <el-form-item label="年龄段" prop="nld"><el-input v-model="modalForm.nld" ></el-input></el-form-item>
+        <el-form-item label="年龄" prop="nld"><el-input v-model="modalForm.nld" ></el-input></el-form-item>
         <el-form-item label="性别" prop="sex">
           <el-select v-model="modalForm.sex"  placeholder="性别">
             <el-option label="男" value="1"></el-option>

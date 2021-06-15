@@ -11,7 +11,7 @@
       </el-row>
       <hr />
       <el-row style="margin:35px 0px">
-        <el-col :span="22"><el-input placeholder="设备ID/设备位置" prefix-icon="el-icon-search" v-model="search"></el-input></el-col>
+        <el-col :span="22"><el-input placeholder="社区名称" prefix-icon="el-icon-search" v-model="search"></el-input></el-col>
         <el-col :span="2"><el-button type="primary" style="float:right" @click="getData">查询</el-button></el-col>
       </el-row>
       <div>

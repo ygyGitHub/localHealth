@@ -25,21 +25,9 @@
           <el-table-column prop="zb" label="指标" min-width="150" align="center"></el-table-column>
           <el-table-column prop="zbms" label="指标描述" min-width="150" align="center"></el-table-column>
           <el-table-column prop="jqsp" label="基期水平" min-width="150" align="center"></el-table-column>
-          <el-table-column prop="cysp" label="常营水平" min-width="150" align="center"></el-table-column>
+          <el-table-column prop="cysp" label="常营" min-width="150" align="center"></el-table-column>
           <el-table-column prop="mbz" label="2020年目标值" min-width="150" align="center"></el-table-column>
-          <el-table-column prop="db" label="是否达标" min-width="150" align="center">
-            <template slot-scope="scope">
-              <span v-if="scope.row.db==1">是</span>
-              <span v-if="scope.row.db==0">否</span>
-            </template>
-          </el-table-column>
           <el-table-column prop="mbz1" label="2030年目标值" min-width="150" align="center"></el-table-column>
-          <el-table-column prop="db1" label="是否达标" min-width="150" align="center">
-            <template slot-scope="scope">
-              <span v-if="scope.row.db1==1">是</span>
-              <span v-if="scope.row.db1==0">否</span>
-            </template>
-          </el-table-column>
           <el-table-column label="操作" min-width="200" align="center">
             <template slot-scope="scope">
               <el-button type="text" @click="openModal('edit', scope.row)">编辑</el-button>
@@ -67,23 +55,9 @@
         <el-form-item label="指标" prop="zb"><el-input v-model="modalForm.zb" ></el-input></el-form-item>
         <el-form-item label="指标描述" prop="zbms"><el-input type="textarea" v-model="modalForm.zbms" ></el-input></el-form-item>
         <el-form-item label="基期水平" prop="jqsp"><el-input v-model="modalForm.jqsp" ></el-input></el-form-item>
-        <el-form-item label="常营水平" prop="cysp"><el-input v-model="modalForm.cysp" ></el-input></el-form-item>
+        <el-form-item label="常营" prop="cysp"><el-input v-model="modalForm.cysp" ></el-input></el-form-item>
         <el-form-item label="2020年目标值" prop="mbz"><el-input v-model="modalForm.mbz" ></el-input></el-form-item>
-<!--        <el-form-item label="是否达标" prop="db"><el-input v-model="modalForm.db" ></el-input></el-form-item> -->
-        <el-form-item label="活动区域" prop="db">
-            <el-select v-model="modalForm.db" placeholder="请选择是否达标">
-              <el-option label="是" value="1"></el-option>
-              <el-option label="否" value="0"></el-option>
-            </el-select>
-          </el-form-item>
         <el-form-item label="2030年目标值" prop="mbz1"><el-input v-model="modalForm.mbz1" ></el-input></el-form-item>
-        <!-- <el-form-item label="是否达标" prop="db1"><el-input v-model="modalForm.db1" ></el-input></el-form-item> -->
-      <el-form-item label="活动区域" prop="db1">
-          <el-select v-model="modalForm.db1" placeholder="请选择是否达标">
-            <el-option label="是" value="1"></el-option>
-            <el-option label="否" value="0"></el-option>
-          </el-select>
-        </el-form-item>
       </el-form>
       <div class="divauto" style="text-align: center;">
         <el-button type="primary" size="mini" @click="dialogObj.isShow = false">取消</el-button>
@@ -130,20 +104,16 @@ export default {
         jqsp: '',
         cysp: '',
         mbz: '',
-         db: '',
-         mbz1: '',
-         db1: '',
+        mbz1: '',
       },
       rules: {
         xdmc: [{ required: true, message: '行动名称不能为空', trigger: ' ' }],
         zb: [{ required: true, message: '指标不能为空', trigger: ' ' }],
         zbms: [{ required: true, message: '指标描述不能为空', trigger: ' ' }],
         jqsp: [{ required: true, message: '基期水平不能为空', trigger: ' ' }],
-        cysp: [{ required: true, message: '常营水平不能为空', trigger: ' ' }],
+        cysp: [{ required: true, message: '常营不能为空', trigger: ' ' }],
         mbz: [{ required: true, message: '2020年目标值不能为空', trigger: ' ' }],
-        db: [{ required: true, message: '是否达标不能为空', trigger: ' ' }],
         mbz1: [{ required: true, message: '2030年目标值不能为空', trigger: ' ' }],
-        db1: [{ required: true, message: '是否达标不能为空', trigger: ' ' }],
       },
       importModal: {
         title: '批量上传', // 标题
@@ -187,9 +157,7 @@ export default {
         jqsp: '',
         cysp: '',
         mbz: '',
-         db: '',
-         mbz1: '',
-         db1: '',
+        mbz1: '',
       };
         this.dialogObj.title = '添加';
       } else {
@@ -268,11 +236,9 @@ export default {
         zb: '指标',
         zbms: '指标描述',
         jqsp: '基期水平',
-        cysp: '常营水平',
+        cysp: '常营',
         mbz: '2020年目标值',
-         db: '0',
-         mbz1: '2030年目标值',
-         db1: '1',
+        mbz1: '2030年目标值',
       };
         obj.xdmc = obj.xdmc + i;
         obj.zb = obj.zb + i;
@@ -281,7 +247,6 @@ export default {
         obj.cysp = obj.cysp + i;
         obj.mbz = obj.mbz + i;
         obj.mbz1 = obj.mbz1 + i;
-
         this.tableData.push(obj);
       }
       this.pagination.total = this.tableData.length;
