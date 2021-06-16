@@ -71,7 +71,7 @@
               </el-select>
             </el-form-item>
             <el-form-item label="科室" prop="ks">
-              <el-input  v-model="modalForm.ks"></el-input>
+              <el-input v-model="modalForm.ks"></el-input>
             </el-form-item>
           </el-form>
         </el-col>
@@ -95,65 +95,31 @@
       </div>
     </modal>
     <modal :modalObj="rosterModal">
-      <div style="float:left; width:auto;">
-        <div style=" width: 100%;float:left;">
-          <el-select v-model="community" placeholder="请选择" size="mini" class="communityCelect">
-            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-            </el-option>
-          </el-select>
-        </div>
-        <div class="rosterTitle">{{pbq}}-{{pbz}} <i class="el-icon-date"></i> 排班</div>
+      <div v-for="item in rosterData" :key="item" style="padding:15px">
+        <el-row>
+          <el-col :span="2" style="margin-top:3px"><span>{{item.sq}}</span></el-col>
+          <el-col :span="6">
+            <span>医生</span>
+            <el-select v-model="item.ys" placeholder="请选择" size="mini" style="width:75%">
+              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+              </el-option>
+            </el-select>
+          </el-col>
+          <el-col :span="8">
+            <span>坐诊日期</span>
+            <el-date-picker v-model="item.zzrq" type="date" placeholder="选择日期" size="mini" style="width:70%">
+            </el-date-picker>
+          </el-col>
+          <el-col :span="8">
+            <span>坐诊时间</span>
+            <el-time-picker is-range v-model="item.zzsj" range-separator="至" start-placeholder="开始时间" end-placeholder="结束时间" placeholder="选择时间范围" size="mini" style="width:70%">
+            </el-time-picker>
+          </el-col>
+        </el-row>
       </div>
-      <el-table :data="rosterData" :span-method="objectSpanMethod" style="width: 100%" border>
-        <el-table-column label="" width="117">
-          <template slot-scope="scope">
-            <span>{{scope.row.label}}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="星期一" width="120">
-          <template slot-scope="scope">
-            <el-select v-model="community" placeholder="请选择" size="mini">
-              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
-            </el-select>
-          </template>
-        </el-table-column>
-        <el-table-column label="星期二" width="120">
-          <template slot-scope="scope">
-            <el-select v-model="community" placeholder="请选择" size="mini">
-              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
-            </el-select>
-          </template>
-        </el-table-column>
-        <el-table-column label="星期三" width="120">
-          <template slot-scope="scope">
-            <el-select v-model="community" placeholder="请选择" size="mini">
-              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
-            </el-select>
-          </template>
-        </el-table-column>
-        <el-table-column label="星期四" width="120">
-          <template slot-scope="scope">
-            <el-select v-model="community" placeholder="请选择" size="mini">
-              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
-            </el-select>
-          </template>
-        </el-table-column>
-        <el-table-column label="星期五" width="120">
-          <template slot-scope="scope">
-            <el-select v-model="community" placeholder="请选择" size="mini">
-              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
-            </el-select>
-          </template>
-        </el-table-column>
-      </el-table>
       <div class="divauto" style="text-align: center;margin-top:10px">
-        <el-button type="primary" size="mini" @click="dialogObj.isShow = false">取消</el-button>
-        <el-button type="primary" size="mini" @click="sureModal">确定</el-button>
+        <el-button type="primary" size="mini" @click="rosterModal.isShow = false">取消</el-button>
+        <el-button type="primary" size="mini" @click="rosterSureModal">确定</el-button>
       </div>
     </modal>
   </div>
@@ -208,35 +174,43 @@ export default {
       rosterModal: {
         title: '排班', // 标题
         isShow: false, // 是否显示
-        width: '40%',
-        height: '40%'
+        width: '50%',
+        height: '60%'
       },
       options: [{
-        value: '选项1',
-        label: '第一社区'
+        value: '1',
+        label: '医生1'
       }, {
-        value: '选项2',
-        label: '第二社区'
+        value: '2',
+        label: '医生2'
       }],
       community: '',
       pbq: '',
       pbz: '',
       rosterData: [
         {
-          id: '1',
-          label: '上午',
+          sq: '第一社区',
+          ys: '',
+          zzrq: '',
+          zzsj: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)]
         },
         {
-          id: '2',
-          label: '上午',
+          sq: '第二社区',
+          ys: '',
+          zzrq: '',
+          zzsj: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)]
         },
         {
-          id: '3',
-          label: '上午',
+          sq: '第三社区',
+          ys: '',
+          zzrq: '',
+          zzsj: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)]
         },
         {
-          id: '4',
-          label: '上午',
+          sq: '第四社区',
+          ys: '',
+          zzrq: '',
+          zzsj: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)]
         },
       ]
     };
@@ -395,40 +369,9 @@ export default {
       return isJPG && isLt2M;
     },
     roster() {
-      this.getRosterDate();
       this.rosterModal.isShow = true;
     },
-    getRosterDate() {
-      var now = new Date();
-      var nowTime = now.getTime();
-      var day = now.getDay();
-      var oneDayLong = 24 * 60 * 60 * 1000;
-      var MondayTime = nowTime - (day - 1) * oneDayLong;
-      var SundayTime = nowTime + (7 - day) * oneDayLong;
-      var monday = new Date(MondayTime);
-      var sunday = new Date(SundayTime);
-      var currentMonday = new Date(monday)
-      currentMonday = currentMonday.getMonth() + 1 + '.' + currentMonday.getDate()
-      this.pbq = currentMonday;
-      var currentSunday = new Date(sunday)
-      currentSunday = currentSunday.getMonth() + 1 + '.' + currentSunday.getDate()
-      this.pbz = currentSunday;
-    },
-    objectSpanMethod({ row, column, rowIndex, columnIndex }) {
-      if (columnIndex === 0) {
-        if (rowIndex % 2 === 0) {
-          return {
-            rowspan: 2,
-            colspan: 1
-          };
-        } else {
-          return {
-            rowspan: 0,
-            colspan: 0
-          };
-        }
-      }
-    }
+    rosterSureModal() { }
   },
   created() {
     this.getData();
