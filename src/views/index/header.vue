@@ -14,14 +14,14 @@
       <span class="title">{{ week }}</span>
       <span class="title">多云</span>
     </div>
-    <el-dropdown class="header-operations">
+    <el-dropdown class="header-operations" @command="dropOut">
       <span class="el-dropdown-link">
         <i class="el-icon-user-solid userIcon"></i>
         {{ user }}
         <i class="el-icon-arrow-down el-icon--right"></i>
       </span>
       <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item icon="el-icon-search">退出</el-dropdown-item>
+        <el-dropdown-item>退出</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
   </div>
@@ -35,7 +35,7 @@ export default {
       data: "",
       week: "",
       weather: "",
-      user: "张三"
+      user: localStorage.getItem("userName")
     };
   },
   methods: {
@@ -84,6 +84,12 @@ export default {
             this.weather = ""
           }
         }
+      });
+    },
+    dropOut() {
+      localStorage.clear();
+      this.$router.push({
+        path: "/login "
       });
     }
   },

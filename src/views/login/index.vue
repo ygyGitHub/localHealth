@@ -17,7 +17,7 @@
             <el-input type="password" v-model="form.password" auto-complete="off" prefix-icon="el-icon-lock" placeholder="密码"></el-input>
           </el-form-item>
           <el-form-item label="" prop="isCheck" style="float: left;">
-            <el-checkbox label="记住账号？" name="type"></el-checkbox>
+            <el-checkbox label="记住账号？" name="type" v-model="form.isCheck"></el-checkbox>
           </el-form-item>
           <el-form-item style="margin: auto;width: 100%;">
             <el-button type="primary" style="width:100%;" v-loading="loading" @click.native.prevent="handleSubmit('form')">登录系统</el-button>
@@ -41,7 +41,7 @@ export default {
       form: {
         name: "",
         password: "",
-        isCheck: ""
+        isCheck: false
       },
       rules: {
         name: [{ required: true, message: "请输入登录名", trigger: " " }],
@@ -61,6 +61,10 @@ export default {
           //todo 调接口
           //如果成功 判断是否记住密码
           //如果记住。则吧账户信息入vuex或者...
+          if (this.form.password) {
+            localStorage.setItem("userName", this.form.name);
+            localStorage.setItem("password", this.form.password);
+          }
           this.$router.push({
             path: "/index"
           });

@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
 import Login from "../views/login/index.vue";
 import Index from "../views/index/index.vue";
 import population from "../views/home/population.vue";
@@ -24,7 +23,7 @@ import expertAppointment from "../views/applets/expertAppointment.vue";
 import screeningItems from "../views/applets/screeningItems.vue";
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -133,3 +132,13 @@ export default new Router({
     }
   ]
 })
+// 全局路由守卫
+router.beforeEach((to, from, next) => {
+  const name = localStorage.getItem('userName');//查看本地存储上是否有name对象
+  if (["", null, 'null', undefined, 'undefined'].includes(name) && to.path != '/login') {//短路逻辑，有就可以继续执行，没有就跳转到登录页面
+    next("/login")//跳转登录页面
+  } else {
+    next()
+  }
+});
+export default router
