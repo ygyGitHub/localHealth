@@ -8,7 +8,7 @@
     </el-header>
     <el-main>
       <el-card class="box-card" style="float:right">
-        <div>欢迎登录系统</div>
+        <div style="font-size:20px">欢迎登录系统</div>
         <el-form ref="form" :model="form" :rules="rules" style="margin-top:13%">
           <el-form-item label="" prop="name">
             <el-input type="text" v-model="form.name" auto-complete="off" prefix-icon="el-icon-s-custom" placeholder="用户名"></el-input>
@@ -25,7 +25,7 @@
         </el-form>
       </el-card>
     </el-main>
-    <el-footer style=" height: 100px">
+    <el-footer style="height: 100px">
       <div>版权所有 © 北京红移云创科技有限公司 京ICP备19017496号</div>
       <div>技术支持：北京红移云创科技有限公司</div>
       <div>联系电话：010-67814030 13910603885</div>
@@ -96,6 +96,7 @@ export default {
 .logoText {
   display: inline-block;
   padding-left: 30px;
+  font-size: 48px;
 }
 .logo {
   display: inline-block;
@@ -121,5 +122,6 @@ export default {
   color: #333;
   text-align: center;
   line-height: 30px;
+  font-size: 14px;
 }
 </style>
