@@ -14,7 +14,7 @@
       <hr />
       <el-row style="margin:35px 0px">
         <el-col :span="22">
-          <el-input placeholder="姓名/职称/所属医院/医院类型/擅长/坐诊日期" prefix-icon="el-icon-search" v-model="search"></el-input>
+          <el-input placeholder="姓名/职称/所属医院/医院类型/科室" prefix-icon="el-icon-search" v-model="search"></el-input>
         </el-col>
         <el-col :span="2">
           <el-button type="primary" style="float:right" @click="getData">查询</el-button>
@@ -30,9 +30,14 @@
           <el-table-column prop="xm" label="姓名" min-width="150" align="center"></el-table-column>
           <el-table-column prop="zc" label="职称" min-width="150" align="center"></el-table-column>
           <el-table-column prop="ssyy" label="所属医院" min-width="150" align="center"></el-table-column>
-          <el-table-column prop="ssyylx" label="所属医院类型" min-width="150" align="center"></el-table-column>
-          <el-table-column prop="sc" label="擅长" min-width="150" align="center"></el-table-column>
-          <el-table-column prop="zzrq" label="坐诊日期" min-width="150" align="center"></el-table-column>
+          <el-table-column prop="ssyylx" label="所属医院类型" min-width="150" align="center">
+            <template slot-scope="scope">
+              <span v-if="scope.row.ssyylx==1">一甲</span>
+              <span v-if="scope.row.ssyylx==2">二甲</span>
+              <span v-if="scope.row.ssyylx==3">三甲</span>
+            </template>
+          </el-table-column>
+          <el-table-column prop="ks" label="科室" min-width="150" align="center"></el-table-column>
           <el-table-column label="操作" min-width="200" align="center">
             <template slot-scope="scope">
               <el-button type="text" @click="openModal('edit', scope.row)">编辑</el-button>
@@ -59,13 +64,14 @@
               <el-input v-model="modalForm.ssyy"></el-input>
             </el-form-item>
             <el-form-item label="所属医院类型" prop="ssyylx">
-              <el-input v-model="modalForm.ssyylx"></el-input>
+              <el-select v-model="modalForm.ssyylx" placeholder="所属医院类型" style="width:100%">
+                <el-option label="一甲" value="1"></el-option>
+                <el-option label="二甲" value="2"></el-option>
+                <el-option label="三甲" value="3"></el-option>
+              </el-select>
             </el-form-item>
-            <el-form-item label="擅长" prop="sc">
-              <el-input type="textarea" v-model="modalForm.sc"></el-input>
-            </el-form-item>
-            <el-form-item label="坐诊日期" prop="zzrq">
-              <el-input v-model="modalForm.zzrq"></el-input>
+            <el-form-item label="科室" prop="ks">
+              <el-input  v-model="modalForm.ks"></el-input>
             </el-form-item>
           </el-form>
         </el-col>
@@ -181,16 +187,14 @@ export default {
         zc: '',
         ssyy: '',
         ssyylx: '',
-        sc: '',
-        zzrq: '',
+        ks: '',
       },
       rules: {
         xm: [{ required: true, message: '姓名不能为空', trigger: ' ' }],
         zc: [{ required: true, message: '职称不能为空', trigger: ' ' }],
         ssyy: [{ required: true, message: '所属医院不能为空', trigger: ' ' }],
         ssyylx: [{ required: true, message: '所属医院类型不能为空', trigger: ' ' }],
-        sc: [{ required: true, message: '擅长不能为空', trigger: ' ' }],
-        zzrq: [{ required: true, message: '坐诊日期不能为空', trigger: ' ' }],
+        ks: [{ required: true, message: '科室不能为空', trigger: ' ' }],
       },
       importModal: {
         title: '批量上传', // 标题
@@ -267,8 +271,7 @@ export default {
           zc: '',
           ssyy: '',
           ssyylx: '',
-          sc: '',
-          zzrq: '',
+          ks: '',
         };
         this.dialogObj.title = '添加';
       } else {
@@ -347,15 +350,13 @@ export default {
           zc: '职称',
           ssyy: '所属医院',
           ssyylx: '所属医院类型',
-          sc: '擅长',
-          zzrq: '坐诊日期',
+          ks: '科室',
         };
         obj.xm = obj.xm + i;
         obj.zc = obj.zc + i;
         obj.ssyy = obj.ssyy + i;
         obj.ssyylx = obj.ssyylx + i;
-        obj.sc = obj.sc + i;
-        obj.zzrq = obj.zzrq + i;
+        obj.ks = obj.ks + i;
         this.tableData.push(obj);
       }
       this.pagination.total = this.tableData.length;
