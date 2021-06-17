@@ -64,6 +64,7 @@ export default {
           if (this.form.password) {
             localStorage.setItem("userName", this.form.name);
             localStorage.setItem("password", this.form.password);
+            localStorage.setItem("isCheck", this.form.password);
           }
           this.$router.push({
             path: "/index"
@@ -75,7 +76,14 @@ export default {
     }
   },
   created() { },
-  mounted() { }
+  mounted() {
+    var isCheck = localStorage.getItem("isCheck")
+    this.form.password = isCheck
+    if (isCheck) {
+      this.form.name = localStorage.getItem("userName")
+      this.form.password = localStorage.getItem("password")
+    }
+  }
 };
 </script>
 

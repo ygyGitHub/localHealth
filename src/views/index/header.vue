@@ -87,7 +87,8 @@ export default {
       });
     },
     dropOut() {
-      localStorage.clear();
+      localStorage.removeItem("userName");
+      localStorage.removeItem("password");
       this.$router.push({
         path: "/login "
       });
