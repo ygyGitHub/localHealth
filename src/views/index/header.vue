@@ -12,7 +12,7 @@
       <span>常营健康系统管理平台</span>
       <span class="title">{{ data }}</span>
       <span class="title">{{ week }}</span>
-      <span class="title">多云</span>
+      <span class="title">{{ weather }}</span>
     </div>
     <el-dropdown class="header-operations" @command="dropOut">
       <span class="el-dropdown-link">
@@ -72,19 +72,14 @@ export default {
       this.week = "星期" + week;
     },
     getWeather() {
-      $.ajax({
-        type: "GET",
-        url: "http://wthrcdn.etouch.cn/weather_mini?city='北京'",
-        dataType: "JSON",
-        error: function () {
-          console.log("数据错误");
-        },
-        success: function (res) {
-          if (res.status == 1000) {
-            this.weather = ""
-          }
-        }
-      });
+      var city = '北京'
+      var url = encodeURI("http://wthrcdn.etouch.cn/weather_mini?city=" + city);
+      this.$https
+        .get(url)
+        .then(res => {
+          this.weather = res.data.forecast[0].type
+        })
+        .catch(err => { });
     },
     dropOut() {
       localStorage.removeItem("userName");
@@ -96,7 +91,7 @@ export default {
   },
   created() {
     this.getData();
-    // this.getWeather();
+    this.getWeather();
   },
   mounted() { }
 };
